@@ -12,9 +12,9 @@
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ArticlesMonitoring</name>
-	<description>he project&apos;s objective is to build a platform for monitoring articles from online newspapers, storing them in a database, making them searchable through a search server, and extracting representations of themes discussed in a set of articles returned as results for a given query.</description>
+	<description>The project&apos;s objective is to build a platform for monitoring articles from online newspapers, storing them in a database, making them searchable through a search server, and extracting representations of themes discussed in a set of articles returned as results for a given query.</description>
 	<properties>
-		<java.version>22</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
