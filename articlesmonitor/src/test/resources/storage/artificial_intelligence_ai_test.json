@@ -1,0 +1,27 @@
+{
+    "response": {
+        "status": "ok",
+        "userTier": "developer",
+        "total": 1,
+        "startIndex": 1,
+        "pageSize": 1,
+        "currentPage": 1,
+        "pages": 1,
+        "orderBy": "relevance",
+        "results": [
+            {
+                "id": "id",
+                "type": "article",
+                "sectionId": "artificialintelligence",
+                "sectionName": "Artificial intelligence",
+                "webPublicationDate": "2001-01-01T00:00:00Z",
+                "webTitle": "Title about AI",
+                "webUrl": "https://www.theguardian.com",
+                "apiUrl": "https://content.guardianapis.com",
+                "isHosted": false,
+                "pillarId": "pillarId",
+                "pillarName": "pillarName"
+            }
+        ]
+    }
+}
