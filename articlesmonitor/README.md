@@ -4,6 +4,9 @@ docker compose up
 
 mvn spring-boot:run
 
+--- PER FARE GIRARE SOLO I TEST ---
+mvn clean test
+
 --- PER PROVARLO ---
 # Test di successo
 curl -X POST http://localhost:8080/upload \
