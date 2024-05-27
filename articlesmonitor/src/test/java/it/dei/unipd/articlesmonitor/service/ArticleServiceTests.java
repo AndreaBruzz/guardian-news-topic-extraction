@@ -33,6 +33,8 @@ public class ArticleServiceTests {
 
         articleService.saveArticlesFromJson(filename, startDate, endDate);
 
+        //TODO capire come risolvere questo warning
+        @SuppressWarnings("unchecked")
         ArgumentCaptor<List<Article>> captor = ArgumentCaptor.forClass(List.class);
         verify(articleRepository).saveAll(captor.capture());
 
