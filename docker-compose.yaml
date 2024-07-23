@@ -1,20 +1,27 @@
 version: '3.8'
+
 services:
+  monitor-service:
+    build:
+      context: ./monitor-service
+      dockerfile: Dockerfile
+    image: monitor-service:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/articles
+
   mongo:
-    image: mongo:4.4
-    container_name: mongo
+    build:
+      context: ./mongo-service
+      dockerfile: Dockerfile
+    image: mongo:latest
     ports:
       - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
       - mongo-data:/data/db
-    healthcheck:
-      test: "echo 'db.runCommand({ ping: 1 })' | mongo localhost:27017/admin -u root -p example --quiet"
-      interval: 30s
-      timeout: 10s
-      retries: 5
 
 volumes:
   mongo-data:
