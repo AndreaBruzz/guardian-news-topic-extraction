@@ -8,6 +8,7 @@ public class ArticleTests {
     @Test
     public void testArticleConstructorAndGetters() {
         String id = "test-id";
+        String tag = "test-tag";
         String type = "article";
         String sectionId = "test-section";
         String sectionName = "Test Section";
@@ -19,9 +20,10 @@ public class ArticleTests {
         String pillarId = "pillar/test";
         String pillarName = "Test Pillar";
 
-        Article article = new Article(id, type, sectionId, sectionName, webPublicationDate, webTitle, webUrl, apiUrl, isHosted, pillarId, pillarName);
+        Article article = new Article(id, tag, type, sectionId, sectionName, webPublicationDate, webTitle, webUrl, apiUrl, isHosted, pillarId, pillarName);
 
         assertEquals(id, article.getId());
+        assertEquals(tag, article.getTag());
         assertEquals(type, article.getType());
         assertEquals(sectionId, article.getSectionId());
         assertEquals(sectionName, article.getSectionName());
@@ -38,6 +40,7 @@ public class ArticleTests {
     public void testArticleSetters() {
         Article article = new Article();
         article.setId("test-id");
+        article.setTag("test-tag");
         article.setType("article");
         article.setSectionId("test-section");
         article.setSectionName("Test Section");
@@ -50,6 +53,7 @@ public class ArticleTests {
         article.setPillarName("Test Pillar");
 
         assertEquals("test-id", article.getId());
+        assertEquals("test-tag", article.getTag());
         assertEquals("article", article.getType());
         assertEquals("test-section", article.getSectionId());
         assertEquals("Test Section", article.getSectionName());

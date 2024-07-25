@@ -8,6 +8,7 @@ public class Article {
 
     @Id
     private String id;
+    private String tag;
     private String type;
     private String sectionId;
     private String sectionName;
@@ -23,8 +24,9 @@ public class Article {
     public Article() {}
 
     // Overloaded constructor
-    public Article(String id, String type, String sectionId, String sectionName, String webPublicationDate, String webTitle, String webUrl, String apiUrl, boolean isHosted, String pillarId, String pillarName) {
+    public Article(String id, String tag, String type, String sectionId, String sectionName, String webPublicationDate, String webTitle, String webUrl, String apiUrl, boolean isHosted, String pillarId, String pillarName) {
         this.id = id;
+        this.tag = tag;
         this.type = type;
         this.sectionId = sectionId;
         this.sectionName = sectionName;
@@ -44,6 +46,14 @@ public class Article {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public String getType() {
