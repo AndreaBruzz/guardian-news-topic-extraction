@@ -4,7 +4,6 @@ import com.unipd.monitor.services.MonitorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,11 +15,6 @@ public class MonitorController {
 
     @Autowired
     private MonitorService monitorService;
-
-    @GetMapping("/ping")
-    public ResponseEntity<Map<String, String>> ping() {
-        return ResponseEntity.ok(Map.of("status", "monitoring"));
-    }
 
     @PostMapping("/fetch-articles")
     public ResponseEntity<Map<String, String>> fetchAndSaveApiResponse(@RequestBody Map<String, String> request) {
