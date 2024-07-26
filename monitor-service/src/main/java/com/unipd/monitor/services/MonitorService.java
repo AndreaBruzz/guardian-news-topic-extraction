@@ -20,6 +20,20 @@ public class MonitorService {
     @Autowired
     private RestTemplate restTemplate;
 
+    public int getPagesNumber(String url) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        int pages = 0;
+
+        String response = restTemplate.getForObject(url, String.class);
+        try {
+            JsonNode rootNode = objectMapper.readTree(response);
+            pages = rootNode.path("response").path("pages").asInt();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return pages;
+    }
     public void fetchAndSaveApiResponse(String url, String tag) {
         try {
             String response = restTemplate.getForObject(url, String.class);

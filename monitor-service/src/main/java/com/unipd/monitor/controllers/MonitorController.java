@@ -31,8 +31,12 @@ public class MonitorController {
             String endDate = request.get("endDate");
 
             String url = buildApiUrl(issueQuery, startDate, endDate);
-
-            monitorService.fetchAndSaveApiResponse(url, tag);
+            int pages = monitorService.getPagesNumber(url);
+            for (int i = 1; i <= pages; i++) {
+                url += "&page=" + i;
+                System.out.println("page: " + i);
+                monitorService.fetchAndSaveApiResponse(url, tag);
+            }
             return ResponseEntity.ok(Map.of("status", "monitoring"));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(Map.of("status", "error", "message", e.getMessage()));
