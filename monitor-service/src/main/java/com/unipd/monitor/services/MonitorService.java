@@ -1,6 +1,8 @@
 package com.unipd.monitor.services;
 
 import com.unipd.monitor.models.Article;
+
+import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -69,7 +71,8 @@ public class MonitorService {
                 article.setHosted(node.path("isHosted").asBoolean());
                 article.setPillarId(node.path("pillarId").asText());
                 article.setPillarName(node.path("pillarName").asText());
-                article.setBody(node.path("fields").path("body").asText());
+                String bodyHtml = node.path("fields").path("body").asText();
+                article.setBody(Jsoup.parse(bodyHtml).text());
 
                 articles.add(article);
             }
