@@ -36,7 +36,7 @@ public class MonitorService {
 
         return pages;
     }
-    public void fetchAndSaveApiResponse(String url, String tag) {
+    public void collectArticles(String url, String tag) {
         try {
             String response = restTemplate.getForObject(url, String.class);
             List<Article> articles = parseResponse(response, tag);

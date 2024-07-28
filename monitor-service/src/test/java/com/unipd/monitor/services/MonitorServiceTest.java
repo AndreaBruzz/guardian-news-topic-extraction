@@ -37,7 +37,7 @@ public class MonitorServiceTest {
 
         when(restTemplate.getForObject(mockUrl, String.class)).thenReturn(mockResponse);
 
-        monitorService.fetchAndSaveApiResponse(mockUrl, mockTag);
+        monitorService.collectArticles(mockUrl, mockTag);
 
         verify(mongoTemplate, times(1)).save(any(Article.class), eq("articles"));
     }

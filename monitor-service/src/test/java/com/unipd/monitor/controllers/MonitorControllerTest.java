@@ -12,7 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,13 +33,12 @@ public class MonitorControllerTest {
     }
 
     @Test
-    public void testFetchAndSaveApiResponse() throws Exception {
-        String tag = "AI";
-        doNothing().when(monitorService).fetchAndSaveApiResponse(anyString(), eq(tag));
+    public void testArticlesCollect() throws Exception {
+        doNothing().when(monitorService).collectArticles(anyString(), anyString());
 
         String requestJson = "{\"tag\":\"AI\", \"issueQuery\":\"Artificial Intellgence\",\"startDate\":\"2024-01-01\",\"endDate\":\"2024-01-31\"}";
 
-        mockMvc.perform(post("/fetch-articles")
+        mockMvc.perform(post("/collect")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestJson))
                 .andExpect(status().isOk());

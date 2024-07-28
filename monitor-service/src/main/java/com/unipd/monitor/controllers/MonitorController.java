@@ -23,8 +23,8 @@ public class MonitorController {
     @Autowired
     private MonitorService monitorService;
 
-    @PostMapping("/fetch-articles")
-    public ResponseEntity<Map<String, String>> fetchAndSaveApiResponse(@RequestBody Map<String, String> request) {
+    @PostMapping("/collect")
+    public ResponseEntity<Map<String, String>> collect(@RequestBody Map<String, String> request) {
         try {
             String issueQuery = request.get("issueQuery");
             String tag = request.get("tag");
@@ -36,7 +36,7 @@ public class MonitorController {
             for (int i = 1; i <= pages; i++) {
                 url += "&page=" + i;
                 System.out.println("page: " + i);
-                monitorService.fetchAndSaveApiResponse(url, tag);
+                monitorService.collectArticles(url, tag);
             }
             return ResponseEntity.ok(Map.of("status", "monitoring"));
         } catch (Exception e) {
