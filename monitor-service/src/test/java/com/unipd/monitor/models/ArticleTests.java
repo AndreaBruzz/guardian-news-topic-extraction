@@ -19,8 +19,9 @@ public class ArticleTests {
         boolean isHosted = false;
         String pillarId = "pillar/test";
         String pillarName = "Test Pillar";
+        String body = "Test content";
 
-        Article article = new Article(id, tag, type, sectionId, sectionName, webPublicationDate, webTitle, webUrl, apiUrl, isHosted, pillarId, pillarName);
+        Article article = new Article(id, tag, type, sectionId, sectionName, webPublicationDate, webTitle, webUrl, apiUrl, isHosted, pillarId, pillarName, body);
 
         assertEquals(id, article.getId());
         assertEquals(tag, article.getTag());
@@ -34,6 +35,7 @@ public class ArticleTests {
         assertEquals(isHosted, article.isHosted());
         assertEquals(pillarId, article.getPillarId());
         assertEquals(pillarName, article.getPillarName());
+        assertEquals(body, article.getBody());
     }
 
     @Test
@@ -51,6 +53,7 @@ public class ArticleTests {
         article.setHosted(false);
         article.setPillarId("pillar/test");
         article.setPillarName("Test Pillar");
+        article.setBody("Test Content");
 
         assertEquals("test-id", article.getId());
         assertEquals("test-tag", article.getTag());
@@ -64,5 +67,7 @@ public class ArticleTests {
         assertFalse(article.isHosted());
         assertEquals("pillar/test", article.getPillarId());
         assertEquals("Test Pillar", article.getPillarName());
+        assertEquals("Test Content", article.getBody());
+
     }
 }

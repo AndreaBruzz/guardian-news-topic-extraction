@@ -19,12 +19,13 @@ public class Article {
     private boolean isHosted;
     private String pillarId;
     private String pillarName;
+    private String body;
 
     // Default constructor
     public Article() {}
 
     // Overloaded constructor
-    public Article(String id, String tag, String type, String sectionId, String sectionName, String webPublicationDate, String webTitle, String webUrl, String apiUrl, boolean isHosted, String pillarId, String pillarName) {
+    public Article(String id, String tag, String type, String sectionId, String sectionName, String webPublicationDate, String webTitle, String webUrl, String apiUrl, boolean isHosted, String pillarId, String pillarName, String body) {
         this.id = id;
         this.tag = tag;
         this.type = type;
@@ -37,6 +38,7 @@ public class Article {
         this.isHosted = isHosted;
         this.pillarId = pillarId;
         this.pillarName = pillarName;
+        this.body = body;
     }
 
     // Getters and Setters
@@ -134,5 +136,13 @@ public class Article {
 
     public void setPillarName(String pillarName) {
         this.pillarName = pillarName;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 }
