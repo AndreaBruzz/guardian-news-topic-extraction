@@ -3,6 +3,7 @@ package com.unipd.monitor.controllers;
 import com.unipd.monitor.services.MonitorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,12 @@ import java.util.Map;
 
 @RestController
 public class MonitorController {
+
+    @Value("${api.key}")
+    private String apiKey;
+
+    @Value("${base.url}")
+    private String baseUrl;
 
     @Autowired
     private MonitorService monitorService;
@@ -38,12 +45,8 @@ public class MonitorController {
     }
 
     private String buildApiUrl(String issueQuery, String startDate, String endDate) {
-        // TODO vedere se c'è una sorta di ENV per queste variabili
-        String apiKey = "f4be135e-b40a-4089-a36c-5b6a4cc56b2d";
-        String baseUrl = "https://content.guardianapis.com/search";
-
         String url = baseUrl + "?q=" + issueQuery + "&from-date=" + startDate + "&to-date=" + endDate + "&api-key=" + apiKey;
-        System.out.println("Generated URL: " + url); // Log dell'URL generato
+        System.out.println("Generated URL: " + url);
         return url;
     }
 }
