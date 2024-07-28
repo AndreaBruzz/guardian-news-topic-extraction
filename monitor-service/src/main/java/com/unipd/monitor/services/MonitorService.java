@@ -69,6 +69,7 @@ public class MonitorService {
                 article.setHosted(node.path("isHosted").asBoolean());
                 article.setPillarId(node.path("pillarId").asText());
                 article.setPillarName(node.path("pillarName").asText());
+                article.setBody(node.path("fields").path("body").asText());
 
                 articles.add(article);
             }
