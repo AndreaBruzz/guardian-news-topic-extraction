@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.client.RestTemplate;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;  // Import eq
 import static org.mockito.Mockito.*;
 
 public class MonitorServiceTest {
@@ -38,6 +39,6 @@ public class MonitorServiceTest {
 
         monitorService.fetchAndSaveApiResponse(mockUrl, mockTag);
 
-        verify(mongoTemplate, times(1)).save(any(Article.class));
+        verify(mongoTemplate, times(1)).save(any(Article.class), eq("articles"));
     }
 }
