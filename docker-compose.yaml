@@ -10,18 +10,54 @@ services:
       - "8080:8080"
     depends_on:
       - mongo
+      - elasticsearch
     environment:
       - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/articles
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+
+  elasticsearch-service:
+    build:
+      context: ./elasticsearch-service
+      dockerfile: Dockerfile
+    image: elasticsearch-service:latest
+    ports:
+      - "8081:8081"
+    depends_on:
+      - elasticsearch
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/articles
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
 
   mongo:
-    build:
-      context: ./mongo-service
-      dockerfile: Dockerfile
     image: mongo:latest
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.2
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.13.2
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+
 volumes:
   mongo-data:
+    driver: local
+
+  esdata:
+    driver: local
