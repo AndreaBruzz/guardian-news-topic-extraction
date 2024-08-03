@@ -5,7 +5,7 @@ services:
     build:
       context: ./monitor-service
       dockerfile: Dockerfile
-    image: monitor-service:latest
+    #image: monitor-service:latest
     ports:
       - "8080:8080"
     depends_on:

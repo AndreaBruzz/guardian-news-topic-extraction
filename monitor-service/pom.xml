@@ -12,7 +12,7 @@
 	<artifactId>monitor-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>monitor-service</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Software platform project</description>
 	<url/>
 	<licenses>
 		<license/>
