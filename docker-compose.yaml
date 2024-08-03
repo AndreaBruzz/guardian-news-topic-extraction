@@ -23,5 +23,30 @@ services:
     volumes:
       - mongo-data:/data/db
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.1
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+
+  indexing-service:
+    build:
+      context: ./indexing-service
+      dockerfile: Dockerfile
+    depends_on:
+      - mongo
+      - elasticsearch
+
+  topic-modeling-service:
+    build:
+      context: ./topic-modeling-service
+      dockerfile: Dockerfile
+    depends_on:
+      - elasticsearch
+
 volumes:
   mongo-data:
+  es-data:
