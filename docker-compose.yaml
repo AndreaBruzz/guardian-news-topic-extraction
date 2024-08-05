@@ -47,6 +47,17 @@ services:
     depends_on:
       - elasticsearch
 
+  frontend-service:
+    build:
+      context: ./frontend-service
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      - monitor-service
+      - indexing-service
+      - topic-modeling-service
+
 volumes:
   mongo-data:
   es-data:

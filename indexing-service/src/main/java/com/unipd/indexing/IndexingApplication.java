@@ -16,10 +16,10 @@ import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 
 @SpringBootApplication
-public class IndexingServiceApplication {
+public class IndexingApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(IndexingServiceApplication.class, args);
+        SpringApplication.run(IndexingApplication.class, args);
     }
 
     @Bean
