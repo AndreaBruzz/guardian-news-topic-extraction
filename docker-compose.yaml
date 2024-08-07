@@ -23,5 +23,12 @@ services:
     volumes:
       - mongo-data:/data/db
 
+  frontend-service:
+    build:
+      context: ./frontend-service
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+
 volumes:
   mongo-data:
