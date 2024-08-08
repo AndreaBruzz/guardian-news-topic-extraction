@@ -70,4 +70,8 @@ public class MonitorService {
         }
         return articles;
     }
+
+    public List<String> getCollectionNames() {
+        return new ArrayList<>(mongoTemplate.getCollectionNames());
+    }
 }

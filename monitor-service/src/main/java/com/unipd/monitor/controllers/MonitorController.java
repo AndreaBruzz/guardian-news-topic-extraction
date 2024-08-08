@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -46,6 +49,16 @@ public class MonitorController {
         } catch (Exception e) {
             return ResponseEntity.status(500).body(Map.of("status", "error", "message", e.getMessage()));
         }
+    }
+
+    @GetMapping("/collections")
+    public ResponseEntity<Map<String, List<Map<String, String>>>> getCollectionNames() {
+        List<String> collectionNames = monitorService.getCollectionNames();
+        List<Map<String, String>> data = collectionNames.stream()
+                .map(name -> Map.of("collection", name))
+                .collect(Collectors.toList());
+        Map<String, List<Map<String, String>>> response = Map.of("data", data);
+        return ResponseEntity.ok().body(response);
     }
 
     private String buildApiUrl(String issueQuery, String startDate, String endDate) {
