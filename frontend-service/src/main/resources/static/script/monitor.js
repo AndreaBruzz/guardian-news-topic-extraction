@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('monitor-form');
     const submitButton = form.querySelector('button[type="submit"]');
     const responseMessage = document.getElementById('response-message');
+    const collectionsContainer = document.getElementById('collections-container');
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const response = await fetch('http://localhost:8080/collect', {
+            const response = await fetch('http://localhost:8080/api/collect', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -51,4 +52,43 @@ document.addEventListener('DOMContentLoaded', () => {
             submitButton.textContent = 'Submit';
         }
     });
+
+    async function fetchCollections() {
+        try {
+            const response = await fetch('http://localhost:8080/api/collections');
+            if (response.ok) {
+                const result = await response.json();
+                displayCollections(result.data);
+            } else {
+                console.error('Failed to fetch collections');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    function displayCollections(collections) {
+        if (!collectionsContainer) {
+            console.error('Collections container not found');
+            return;
+        }
+        collectionsContainer.innerHTML = ''; // Clear previous content
+        collections.forEach(collection => {
+            const col = document.createElement('div');
+            col.classList.add('col-md-4', 'mb-4');
+            const card = document.createElement('div');
+            card.classList.add('card', 'h-100', 'bg-secondary', 'text-light');
+            card.innerHTML = `<div class="card-body">
+                                <h4 class="card-title text-center">${collection.collection}</h4>
+                              </div>`;
+            card.addEventListener('click', () => {
+                window.location.href = `/${collection.collection}/topics`;
+            });
+            col.appendChild(card);
+            collectionsContainer.appendChild(col);
+        });
+    }
+
+    // Fetch and display collections on page load
+    fetchCollections();
 });
