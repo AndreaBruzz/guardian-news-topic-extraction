@@ -39,17 +39,18 @@ public class MonitorService {
     public void collectArticles(String url, String tag) {
         try {
             String response = restTemplate.getForObject(url, String.class);
-            List<Article> articles = parseResponse(response, tag);
+            List<Article> articles = parseResponse(response);
             for (Article article : articles) {
-                mongoTemplate.save(article, "articles"); // Nome della collezione specificato qui
-                System.out.println("Saved article: " + article); // Log aggiunto
+                System.out.println("Saving into: " + tag);
+                mongoTemplate.save(article, tag);
+                System.out.println("Saved article: " + article);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private List<Article> parseResponse(String response, String tag) throws Exception {
+    private List<Article> parseResponse(String response) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         List<Article> articles = new ArrayList<>();
 
@@ -59,18 +60,8 @@ public class MonitorService {
         if (resultsNode.isArray()) {
             for (JsonNode node : resultsNode) {
                 Article article = new Article();
-                article.setTag(tag);
                 article.setId(node.path("id").asText());
-                article.setType(node.path("type").asText());
-                article.setSectionId(node.path("sectionId").asText());
-                article.setSectionName(node.path("sectionName").asText());
-                article.setWebPublicationDate(node.path("webPublicationDate").asText());
                 article.setWebTitle(node.path("webTitle").asText());
-                article.setWebUrl(node.path("webUrl").asText());
-                article.setApiUrl(node.path("apiUrl").asText());
-                article.setHosted(node.path("isHosted").asBoolean());
-                article.setPillarId(node.path("pillarId").asText());
-                article.setPillarName(node.path("pillarName").asText());
                 String bodyHtml = node.path("fields").path("body").asText();
                 article.setBody(Jsoup.parse(bodyHtml).text());
 

@@ -33,12 +33,12 @@ public class MonitorServiceTest {
     public void testFetchAndSaveApiResponse() throws Exception {
         String mockTag = "tag";
         String mockUrl = "http://mockurl.com";
-        String mockResponse = "{\"response\":{\"status\":\"ok\",\"results\":[{\"id\":\"1\",\"type\":\"article\",\"sectionId\":\"section1\",\"sectionName\":\"Section 1\",\"webPublicationDate\":\"2024-04-08T06:00:26Z\",\"webTitle\":\"Test Title\",\"webUrl\":\"http://example.com\",\"apiUrl\":\"http://example.com/api\",\"isHosted\":false,\"pillarId\":\"pillar1\",\"pillarName\":\"Pillar 1\"}]}}";
+        String mockResponse = "{\"response\":{\"status\":\"ok\",\"results\":[{\"id\":\"testid\", \"webTitle\":\"This is a web title\", \"body\":\"This is a mockup body\"}]}}";
 
         when(restTemplate.getForObject(mockUrl, String.class)).thenReturn(mockResponse);
 
         monitorService.collectArticles(mockUrl, mockTag);
 
-        verify(mongoTemplate, times(1)).save(any(Article.class), eq("articles"));
+        verify(mongoTemplate, times(1)).save(any(Article.class), eq(mockTag));
     }
 }
