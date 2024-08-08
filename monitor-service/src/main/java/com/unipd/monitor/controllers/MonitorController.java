@@ -25,7 +25,7 @@ public class MonitorController {
     private MonitorService monitorService;
 
     @PostMapping("/collect")
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Map<String, String>> collect(@RequestBody Map<String, String> request) {
         try {
             String issueQuery = request.get("issueQuery");
