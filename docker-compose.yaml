@@ -1,27 +1,20 @@
-version: '3.8'
-
 services:
-  monitor-service:
-    build:
-      context: ./monitor-service
-      dockerfile: Dockerfile
-    #image: monitor-service:latest
-    ports:
-      - "8080:8080"
-    depends_on:
-      - mongo
-    environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/articles
-
   mongo:
     build:
       context: ./mongo-service
       dockerfile: Dockerfile
     image: mongo:latest
+    restart: always
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD","mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
 
   frontend-service:
     build:
@@ -32,3 +25,4 @@ services:
 
 volumes:
   mongo-data:
+    driver: local
