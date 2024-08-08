@@ -23,6 +23,18 @@ services:
     ports:
       - "3000:8080"
 
+  # TODO change name
+  spring:
+    build:
+      context: ./monitor-service
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/articles
+
 volumes:
   mongo-data:
     driver: local
