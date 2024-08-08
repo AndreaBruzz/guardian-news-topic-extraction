@@ -8,11 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class MonitorController {
 
     @Value("${api.key}")
@@ -25,7 +28,6 @@ public class MonitorController {
     private MonitorService monitorService;
 
     @PostMapping("/collect")
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Map<String, String>> collect(@RequestBody Map<String, String> request) {
         try {
             String issueQuery = request.get("issueQuery");
