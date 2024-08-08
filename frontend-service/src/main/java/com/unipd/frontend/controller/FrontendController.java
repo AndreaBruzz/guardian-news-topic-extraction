@@ -1,4 +1,4 @@
-package com.example.frontend;
+package com.unipd.frontend.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +8,11 @@ public class FrontendController {
 
     @GetMapping("/")
     public String home() {
-        return "index"; // Serve il file index.html dalla cartella static
+        return "index.html";
+    }
+
+    @GetMapping("/monitor")
+    public String monitor() {
+        return "monitor.html";
     }
 }

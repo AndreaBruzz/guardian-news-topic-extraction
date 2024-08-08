@@ -5,6 +5,7 @@ import com.unipd.monitor.services.MonitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ public class MonitorController {
     private MonitorService monitorService;
 
     @PostMapping("/collect")
+    @CrossOrigin(origins = "http://localhost:8081")
     public ResponseEntity<Map<String, String>> collect(@RequestBody Map<String, String> request) {
         try {
             String issueQuery = request.get("issueQuery");
