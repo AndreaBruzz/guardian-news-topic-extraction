@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitButton.disabled = true;
         submitButton.textContent = 'Submitting...';
         responseMessage.textContent = '';
+        responseMessage.style.display = "none";
 
         const issueQuery = document.getElementById('issueQuery').value;
         const tag = document.getElementById('tag').value;
@@ -36,10 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
                 responseMessage.textContent = `Status: ${result.status}`;
                 responseMessage.style.color = 'green';
+                responseMessage.style.display = "block";
             } else {
                 const result = await response.json();
                 responseMessage.textContent = `Status: ${result.status}, Message: ${result.message}`;
                 responseMessage.style.color = 'red';
+                responseMessage.style.display = "block";
             }
         } catch (error) {
             console.error('Error:', error);

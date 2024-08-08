@@ -39,6 +39,8 @@ services:
     depends_on:
       - mongo
       - elasticsearch
+    ports:
+      - "8082:8080"
 
   topic-modeling-service:
     build:
