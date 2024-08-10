@@ -34,7 +34,7 @@ public class MonitorController {
     public ResponseEntity<Map<String, String>> collect(@RequestBody Map<String, String> request) {
         try {
             String issueQuery = request.get("issueQuery");
-            String tag = request.get("tag");
+            String tag = request.get("tag").toLowerCase();
             String startDate = request.get("startDate");
             String endDate = request.get("endDate");
 

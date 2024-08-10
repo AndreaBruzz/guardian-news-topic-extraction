@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const h1 = document.querySelector('h1');
-    h1.textContent = `Search topics for ${collectionId} collection`;
+    h1.textContent = `Search topics for ${collectionId.toUpperCase()} collection`;
 
     const form = document.getElementById('topics-form');
     const submitButton = form.querySelector('button[type="submit"]');

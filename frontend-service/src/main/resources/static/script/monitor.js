@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.classList.add('card', 'h-100', 'bg-secondary', 'text-light');
             card.innerHTML = `<div class="card-body">
-                                <h4 class="card-title text-center">${collection.collection}</h4>
+                                <h4 class="card-title text-center">${(collection.collection).toUpperCase()}</h4>
                               </div>`;
             card.addEventListener('click', () => {
                 window.location.href = `/topics?collectionId=${collection.collection}`;
