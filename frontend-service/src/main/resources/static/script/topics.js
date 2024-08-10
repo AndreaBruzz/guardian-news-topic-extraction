@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Estrae il tag dall'URL corrente
-    console.log("Il DOM è stato caricato");
     var urlParams = new URLSearchParams(window.location.search);
     var collectionId = urlParams.get('collectionId');
 
@@ -21,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
 
         submitButton.disabled = true;
-        submitButton.textContent = 'Inedxing and searching...\nThis may take a while.';
+        submitButton.textContent = 'Searching...\nThis may take a while.';
         responseMessage.textContent = '';
 
         const topicsQuery = document.getElementById('topicsQuery').value;
