@@ -15,4 +15,9 @@ public class FrontendController {
     public String monitor() {
         return "monitor.html";
     }
+
+    @GetMapping("/topics")
+    public String topics() {
+        return "topics.html";
+    }
 }

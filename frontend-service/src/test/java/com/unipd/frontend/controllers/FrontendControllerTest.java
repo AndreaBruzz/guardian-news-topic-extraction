@@ -30,4 +30,11 @@ public class FrontendControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("monitor.html"));
     }
+
+    @Test
+    public void testTopicsPage() throws Exception {
+        this.mockMvc.perform(get("/topics?collectionId=TST"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("topics.html"));
+    }
 }
