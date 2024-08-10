@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service("elastic")
+@Service("elasticsearch")
 public class ElasticsearchService {
 
     private final RestClient restClient;
@@ -38,44 +38,44 @@ public class ElasticsearchService {
         }
     }
 
-    private List<Hit<Article>> search(String index, String field, String query) throws IOException {
-        SearchResponse<Article> response = esClient.search(s -> s
-                .index(index)
-                .query(q -> q.match(t -> t.field(field).query(query))),
-                Article.class);
-
-        System.out.println("Searching done");
-        return response.hits().hits();
-    }
-
-    public ArrayList<String> retrieveDocuments(String index, String field, String query) {
-        ArrayList<String> articleContents = new ArrayList<>();
-        try {
-            List<Hit<Article>> hits = search(index, field, query);
-            if (hits.isEmpty()) {
-                System.out.println("No articles found");
-            } else {
-                for (Hit<Article> hit : hits) {
-                    Article article = hit.source();
-                    System.out.println("Found article: " + article.getWebTitle());
-                    articleContents.add(article.getBody());
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return articleContents;
-    }
-
     public void index(Article article, String index) {
         try {
             esClient.index(i -> i
                 .index(index)
                 .id(article.getId())
                 .document(article));
+
             System.out.println("Article indexed: " + article.getWebTitle());
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<String> searchArticles(String index, String query) {
+        ArrayList<String> articles = new ArrayList<>();
+
+        try {
+            List<Hit<Article>> hits = searchByQuery(index, query);
+            for (Hit<Article> hit : hits) {
+                Article article = hit.source();
+                System.out.println("Found article: " + article.getWebTitle());
+                articles.add(article.getBody());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return articles;
+    }
+
+    private List<Hit<Article>> searchByQuery(String index, String query) throws IOException {
+        SearchResponse<Article> response = esClient.search(s -> s
+                .index(index)
+                .query(q -> q.multiMatch(t -> t
+                        .query(query)
+                        .fields("webTitle", "body"))),
+ Article.class);
+
+        return response.hits().hits();
     }
 }
