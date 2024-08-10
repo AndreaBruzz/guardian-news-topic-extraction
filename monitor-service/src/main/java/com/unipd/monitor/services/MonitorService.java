@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("monitor")
 public class MonitorService {
 
     @Autowired
