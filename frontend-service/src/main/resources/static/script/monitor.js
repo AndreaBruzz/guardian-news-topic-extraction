@@ -3,13 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitButton = form.querySelector('button[type="submit"]');
     const responseMessage = document.getElementById('response-message');
     const collectionsContainer = document.getElementById('collections-container');
+    const delay = ms => new Promise(res => setTimeout(res, ms));
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         // Disabilita il pulsante di invio e mostra il messaggio di caricamento
         submitButton.disabled = true;
-        submitButton.textContent = 'Submitting...';
+        submitButton.textContent = 'Collecting articles...';
         responseMessage.textContent = '';
 
         const issueQuery = document.getElementById('issueQuery').value;
@@ -48,8 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
             responseMessage.style.color = 'red';
         } finally {
             // Riabilita il pulsante di invio e ripristina il testo originale
-            submitButton.disabled = false;
-            submitButton.textContent = 'Submit';
+            await delay(3000);
+            location.reload();
         }
     });
 
