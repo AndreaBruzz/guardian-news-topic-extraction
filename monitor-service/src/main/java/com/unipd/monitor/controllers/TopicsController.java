@@ -23,6 +23,14 @@ public class TopicsController {
 
     @PostMapping("/topics")
     public ResponseEntity<?> getTopics(@RequestBody TopicsRequestDTO topicsRequest) {
+        String collectionId = topicsRequest.getCollectionId();
+        String query = topicsRequest.getQuery();
+
+        ArrayList<String> articles = elasticsearchService.searchArticles(collectionId, query);
+        
+        for (String article : articles) {
+            System.out.println(article);
+        }
 
         return ResponseEntity.ok("OK");
     }
