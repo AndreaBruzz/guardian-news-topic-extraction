@@ -28,9 +28,10 @@ services:
     volumes:
       - esdata:/usr/share/elasticsearch/data
     environment:
-      - ELASTIC_PASSWORD
       - xpack.security.enabled=false
       - discovery.type=single-node
+    ports:
+      - "9200:9200"
   # TODO change name
   spring:
     build:
@@ -40,8 +41,10 @@ services:
       - 8080:8080
     depends_on:
       - mongo
+      - elastic
     environment:
       - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/articles
+      - ELASTICSEARCH_URL=http://elastic:9200
 
 volumes:
   esdata:
