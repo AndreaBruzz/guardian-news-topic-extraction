@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <h4 class="card-title text-center">${collection.collection}</h4>
                               </div>`;
             card.addEventListener('click', () => {
-                window.location.href = `/${collection.collection}/topics`;
+                window.location.href = `/topics?collectionId=${collection.collection}`;
             });
             col.appendChild(card);
             collectionsContainer.appendChild(col);
