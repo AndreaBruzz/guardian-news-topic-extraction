@@ -22,12 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
         submitButton.textContent = 'Searching...\nThis may take a while.';
         responseMessage.textContent = '';
 
-        const topicsQuery = document.getElementById('topicsQuery').value;
+        const query = document.getElementById('query').value;
         const numOfTopics = document.getElementById('numOfTopics').value;
         const numOfTopWords = document.getElementById('numOfTopWords').value;
 
         const data = {
-            topicsQuery: topicsQuery,
+            query: query,
             numOfTopics: numOfTopics,
             numOfTopWords: numOfTopWords,
             //Passo questa al backend nel body senza avere
