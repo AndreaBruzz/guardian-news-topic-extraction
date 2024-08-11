@@ -2,10 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     var urlParams = new URLSearchParams(window.location.search);
     var collectionId = urlParams.get('collectionId');
 
-    //Evito che l'utente arrivi alla pagina del topic senza 
-    //avere la collectionId
     if (collectionId === null) { 
-        window.location.replace('/monitor')
+        window.location.replace('/monitor');
     }
 
     const h1 = document.querySelector('h1');
@@ -30,8 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
             query: query,
             numOfTopics: numOfTopics,
             numOfTopWords: numOfTopWords,
-            //Passo questa al backend nel body senza avere
-            //una wildcard nelle route api
             collectionId: collectionId,
         };
 
