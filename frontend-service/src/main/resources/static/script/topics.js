@@ -45,7 +45,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (response.ok) {
-                // TODO
+                const result = await response.json();
+                let i = 1;
+                // Elabora i dati ricevuti
+                result.forEach(topic => {
+                    // Estrarre i dati necessari
+                    const topicWords = topic.source.topWords;
+
+                    // Creare un elemento HTML per visualizzare il topic
+                    const topicElement = document.createElement('div');
+                    topicElement.innerHTML = `<h3>Topic ${i}</h3><p>${topicWords.join(', ')}</p>`;
+                    document.body.appendChild(topicElement);
+                    i++;
+                });
             } else {
                 const result = await response.json();
                 responseMessage.textContent = `Status: ${result.status}, Message: ${result.message}`;
