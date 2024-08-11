@@ -1,5 +1,6 @@
 package com.unipd.monitor.services;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.unipd.monitor.models.Article;
@@ -19,12 +20,13 @@ import java.util.List;
 @Service("elasticsearch")
 public class ElasticsearchService {
 
+    @Value("${elasticsearch.base.url}")
+    private String serverUrl;
+
     private final RestClient restClient;
     private final ElasticsearchClient esClient;
 
     public ElasticsearchService() {
-        String serverUrl = System.getenv("ELASTICSEARCH_URL");
-
         this.restClient = RestClient.builder(HttpHost.create(serverUrl)).build();
         ElasticsearchTransport transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
         this.esClient = new ElasticsearchClient(transport);

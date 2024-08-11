@@ -1,5 +1,6 @@
 package com.unipd.monitor.controllers;
 
+import com.unipd.monitor.models.MonitorRequestDTO;
 import com.unipd.monitor.services.MonitorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,10 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:3000")
 public class MonitorController {
 
-    @Value("${api.key}")
+    @Value("${guardian.api.key}")
     private String apiKey;
 
-    @Value("${base.url}")
+    @Value("${guardian.base.url}")
     private String baseUrl;
 
     @Autowired

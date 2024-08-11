@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -18,6 +19,9 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:3000")
 public class TopicsController {
+
+    @Value("${mallet.base.url}")
+    private String baseUrl;
 
     private final ElasticsearchService elasticsearchService;
     private final RestTemplate restTemplate;
@@ -37,7 +41,7 @@ public class TopicsController {
 
         ArrayList<String> articles = elasticsearchService.searchArticles(collectionId, query);
 
-        String malletServiceUrl = "http://mallet-service:8080/mallet/topics?numTopics=" + numTopics + "&numWords=" + numWords;
+        String malletServiceUrl = baseUrl + "?numTopics=" + numTopics + "&numWords=" + numWords;
         List<Map<String, Object>> rawTopics = restTemplate.postForObject(malletServiceUrl, articles, List.class);
 
         List<TopicDTO> topics = new ArrayList<>();
