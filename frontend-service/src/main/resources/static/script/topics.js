@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var urlParams = new URLSearchParams(window.location.search);
     var collectionId = urlParams.get('collectionId');
 
+    // Evito che l'utente arrivi alla pagina del topic senza avere la collectionId
     if (collectionId === null) { 
         window.location.replace('/monitor');
     }
@@ -42,20 +43,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (response.ok) {
                 const result = await response.json();
-                let i = 1;
-                // Elabora i dati ricevuti
-                result.forEach(topic => {
-                    // Estrarre i dati necessari
-                    const topicWords = topic.source.topWords;
+                console.info('Response received:', result);
 
-                    // Creare un elemento HTML per visualizzare il topic
-                    const topicElement = document.createElement('div');
-                    topicElement.innerHTML = `<h3>Topic ${i}</h3><p>${topicWords.join(', ')}</p>`;
-                    document.body.appendChild(topicElement);
-                    i++;
-                });
+                // Rimuovo eventuale contenitore esistente
+                const existingContainer = document.querySelector('.topics-container');
+                if (existingContainer) {
+                    existingContainer.remove();
+                }
+
+                // Creazione del contenitore per i topics
+                const topicsContainer = document.createElement('div');
+                topicsContainer.classList.add('topics-container', 'mt-4');
+
+                // Ciclo attraverso i topics ricevuti e li visualizzo
+                if (result.topics && result.topics.length > 0) {
+                    result.topics.forEach(topic => {
+                        const topicCard = document.createElement('div');
+                        topicCard.classList.add('card', 'mb-3');
+
+                        const topicCardBody = document.createElement('div');
+                        topicCardBody.classList.add('card-body');
+
+                        const topicTitle = document.createElement('h5');
+                        topicTitle.classList.add('card-title');
+                        topicTitle.textContent = `Topic ${topic.id}`;
+
+                        const topicWords = document.createElement('p');
+                        topicWords.classList.add('card-text');
+                        topicWords.textContent = topic.topWords.join(', ');
+
+                        topicCardBody.appendChild(topicTitle);
+                        topicCardBody.appendChild(topicWords);
+                        topicCard.appendChild(topicCardBody);
+                        topicsContainer.appendChild(topicCard);
+                    });
+
+                    // Aggiungo i topics alla pagina
+                    document.body.appendChild(topicsContainer);
+                } else {
+                    responseMessage.textContent = 'No topics found for the given query.';
+                    responseMessage.style.color = 'red';
+                }
             } else {
                 const result = await response.json();
+                console.info('Error response:', result);
                 responseMessage.textContent = `Status: ${result.status}, Message: ${result.message}`;
                 responseMessage.style.color = 'red';
             }
@@ -63,6 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error:', error);
             responseMessage.textContent = 'An error occurred while submitting the data.';
             responseMessage.style.color = 'red';
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Search Topics';
         }
     });
 });
