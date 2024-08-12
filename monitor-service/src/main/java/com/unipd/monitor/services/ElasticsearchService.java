@@ -10,6 +10,8 @@ import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
+import jakarta.annotation.PostConstruct;
+
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 
@@ -23,10 +25,14 @@ public class ElasticsearchService {
     @Value("${elasticsearch.base.url}")
     private String serverUrl;
 
-    private final RestClient restClient;
-    private final ElasticsearchClient esClient;
+    private RestClient restClient;
+    private ElasticsearchClient esClient;
 
     public ElasticsearchService() {
+    }
+
+    @PostConstruct
+    private void init() {
         this.restClient = RestClient.builder(HttpHost.create(serverUrl)).build();
         ElasticsearchTransport transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
         this.esClient = new ElasticsearchClient(transport);
