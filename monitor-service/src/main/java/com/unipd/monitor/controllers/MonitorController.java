@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -32,7 +34,7 @@ public class MonitorController {
     private MonitorService monitorService;
 
     @PostMapping("/collect")
-    public ResponseEntity<Map<String, String>> collect(@RequestBody MonitorRequestDTO monitorRequest) {
+    public ResponseEntity<Map<String, String>> collect(@Valid @RequestBody MonitorRequestDTO monitorRequest) {
         try {
             String apiUrl = buildApiUrl(monitorRequest.getIssueQuery(), monitorRequest.getStartDate(), monitorRequest.getEndDate());
             int pages = monitorService.getPagesNumber(apiUrl);

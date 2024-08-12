@@ -1,10 +1,21 @@
 package com.unipd.monitor.dtos;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class MonitorRequestDTO {
+
+    @NotBlank(message = "Issue query must not be blank")
     private String issueQuery;
-    private String tag;
+
+    @NotNull(message = "Start date must not be null")
     private String startDate;
+
+    @NotNull(message = "End date must not be null")
     private String endDate;
+
+    @NotBlank(message = "Tag must not be blank")
+    private String tag;
 
     public MonitorRequestDTO() {}
 

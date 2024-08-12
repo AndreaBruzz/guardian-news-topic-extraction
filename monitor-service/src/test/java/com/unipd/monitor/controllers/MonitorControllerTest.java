@@ -51,6 +51,16 @@ public class MonitorControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testInvalidRequestOnArticlesCollect() throws Exception {
+        String invalidRequestJson = "{ \"issueQuery\": \"\", \"startDate\": null, \"endDate\": null, \"tag\": \"\" }";
+
+        mockMvc.perform(post("/api/collect")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(invalidRequestJson))
+                .andExpect(status().isBadRequest());
+    }
+
     // TODO fix this test
     // Sembra ci siano problemi nella connessione a mongo db in 
     // fase di test
