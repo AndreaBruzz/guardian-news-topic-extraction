@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 public class TopicsServiceTest {
 
     @Mock
-    private ElasticsearchService elasticsearchService;
+    private SearchService searchService;
 
     @Mock
     private RestTemplate restTemplate;
@@ -45,7 +45,7 @@ public class TopicsServiceTest {
         topic1.put("topic", List.of("word1", "word2"));
         rawTopics.add(topic1);
 
-        when(elasticsearchService.searchArticles("collection123", "AI")).thenReturn((ArrayList<String>) articles);
+        when(searchService.searchArticles("collection123", "AI")).thenReturn((ArrayList<String>) articles);
         when(restTemplate.postForObject(anyString(), eq(articles), eq(List.class))).thenReturn(rawTopics);
 
         TopicResponseDTO response = topicsService.getTopics(requestDTO);
