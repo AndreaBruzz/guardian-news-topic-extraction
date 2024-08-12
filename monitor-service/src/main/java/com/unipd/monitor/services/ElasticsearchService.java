@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("elasticsearch")
-public class ElasticsearchService {
+public class ElasticsearchService implements AutoCloseable{
 
     @Value("${elasticsearch.base.url}")
     private String serverUrl;
@@ -29,6 +29,13 @@ public class ElasticsearchService {
     private ElasticsearchClient esClient;
 
     public ElasticsearchService() {
+    }
+
+    @Override
+    public void close() throws Exception {
+        if (restClient != null) {
+            restClient.close();
+        }
     }
 
     @PostConstruct
