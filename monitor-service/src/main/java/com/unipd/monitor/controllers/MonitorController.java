@@ -1,6 +1,6 @@
 package com.unipd.monitor.controllers;
 
-import com.unipd.monitor.models.MonitorRequestDTO;
+import com.unipd.monitor.dtos.MonitorRequestDTO;
 import com.unipd.monitor.services.MonitorService;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.unipd.monitor.models;
+package com.unipd.monitor.dtos;
 
 import java.util.List;
 

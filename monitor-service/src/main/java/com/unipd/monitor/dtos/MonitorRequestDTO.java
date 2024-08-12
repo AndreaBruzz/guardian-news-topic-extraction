@@ -1,4 +1,4 @@
-package com.unipd.monitor.models;
+package com.unipd.monitor.dtos;
 
 public class MonitorRequestDTO {
     private String issueQuery;

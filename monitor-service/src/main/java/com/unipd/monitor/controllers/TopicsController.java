@@ -1,8 +1,8 @@
 package com.unipd.monitor.controllers;
 
-import com.unipd.monitor.models.TopicsRequestDTO;
-import com.unipd.monitor.models.TopicDTO;
-import com.unipd.monitor.models.TopicResponseDTO;
+import com.unipd.monitor.dtos.TopicDTO;
+import com.unipd.monitor.dtos.TopicResponseDTO;
+import com.unipd.monitor.dtos.TopicsRequestDTO;
 import com.unipd.monitor.services.ElasticsearchService;
 
 import java.util.ArrayList;

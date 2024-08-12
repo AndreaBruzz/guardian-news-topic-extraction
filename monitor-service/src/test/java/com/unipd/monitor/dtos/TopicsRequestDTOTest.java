@@ -1,6 +1,7 @@
-package com.unipd.monitor.models;
+package com.unipd.monitor.dtos;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TopicsRequestDTOTest {
