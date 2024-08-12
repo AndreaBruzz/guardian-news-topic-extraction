@@ -26,7 +26,7 @@ import java.util.TreeSet;
 @Service
 public class MalletService {
 
-    public List<Topic> getTopics(List<String> articles, int numTopics, int numWords) throws Exception {
+    public List<Topic> extractTopics(List<String> articles, int numTopics, int numWords) throws Exception {
         // Creazione della lista di pipe per il preprocessing dei documenti
         ArrayList<Pipe> pipeList = new ArrayList<>();
 

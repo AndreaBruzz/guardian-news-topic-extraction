@@ -19,9 +19,9 @@ public class MalletController {
     }
 
     @PostMapping("/topics")
-    public List<Topic> extractTopics(@RequestBody List<String> documents,
+    public List<Topic> getTopics(@RequestBody List<String> documents,
                                      @RequestParam int numTopics,
                                      @RequestParam int numWords) throws Exception {
-        return malletService.getTopics(documents, numTopics, numWords);
+        return malletService.extractTopics(documents, numTopics, numWords);
     }
 }
