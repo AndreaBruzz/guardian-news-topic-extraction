@@ -23,7 +23,7 @@ public class MonitorService {
     private RestTemplate restTemplate;
 
     @Autowired
-    private ElasticsearchService elasticsearchService;
+    private IndexingService indexingService;
 
     public int getPagesNumber(String url) {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -47,7 +47,7 @@ public class MonitorService {
                 System.out.println("Saving into: " + tag);
                 mongoTemplate.save(article, tag);
                 System.out.println("Saved article: " + article);
-                elasticsearchService.index(article, tag);
+                indexingService.indexArticle(article, tag);
             }
         } catch (Exception e) {
             e.printStackTrace();
