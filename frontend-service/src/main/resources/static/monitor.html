@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monitor Service Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style.css"> <!-- Il tuo file CSS personalizzato -->
 </head>
 
 <body class="bg-dark text-light">
-    <header class="text-center my-4">
-        <h1>Monitor Service Dashboard</h1>
-    </header>
+    <div id="header-placeholder"></div> <!-- Placeholder per l'header -->
+
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -40,10 +40,14 @@
         <h3>You're currently monitoring:</h3>
         <div class="row mt-4" id="collections-container"></div>
     </main>
+
+    <div id="footer-placeholder"></div> <!-- Placeholder per il footer -->
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="script/monitor.js"></script>
+    <script src="script/loadComponents.js"></script> <!-- Script per caricare header e footer -->
 </body>
 
 </html>

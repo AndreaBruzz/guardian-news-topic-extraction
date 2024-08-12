@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Disabilita il pulsante di invio e mostra il messaggio di caricamento
         submitButton.disabled = true;
-        submitButton.textContent = 'Collecting articles...';
+        submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Collecting...';
         responseMessage.textContent = '';
 
         const issueQuery = document.getElementById('issueQuery').value;
@@ -36,23 +36,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (response.ok) {
                 const result = await response.json();
-                responseMessage.textContent = `Status: ${result.status}`;
-                responseMessage.style.color = 'green';
+                showResponseMessage(`✔️ Status: ${result.status}`, 'success');
             } else {
                 const result = await response.json();
-                responseMessage.textContent = `Status: ${result.status}, Message: ${result.message}`;
-                responseMessage.style.color = 'red';
+                showResponseMessage(`❌ Status: ${result.status}, Message: ${result.message}`, 'error');
             }
         } catch (error) {
             console.error('Error:', error);
-            responseMessage.textContent = 'An error occurred while submitting the data.';
-            responseMessage.style.color = 'red';
+            showResponseMessage('❌ An error occurred while submitting the data.', 'error');
         } finally {
             // Riabilita il pulsante di invio e ripristina il testo originale
             await delay(3000);
             location.reload();
         }
     });
+
+    function showResponseMessage(message, type) {
+        responseMessage.textContent = message;
+        responseMessage.className = type === 'success' ? 'text-success' : 'text-danger';
+        responseMessage.style.opacity = 1;
+        setTimeout(() => {
+            responseMessage.style.transition = 'opacity 1s';
+            responseMessage.style.opacity = 0;
+        }, 3000);
+    }
 
     async function fetchCollections() {
         try {
@@ -78,8 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const col = document.createElement('div');
             col.classList.add('col-md-4', 'mb-4');
             const card = document.createElement('div');
-            card.classList.add('card', 'h-100', 'bg-secondary', 'text-light');
-            card.innerHTML = `<div class="card-body">
+            card.classList.add('card', 'h-100', 'bg-secondary', 'text-light', 'collection-card', 'shadow-sm');
+            card.innerHTML = `<div class="card-body d-flex flex-column align-items-center justify-content-center">
                                 <h4 class="card-title text-center">${(collection.collection).toUpperCase()}</h4>
                               </div>`;
             card.addEventListener('click', () => {
@@ -87,6 +94,16 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             col.appendChild(card);
             collectionsContainer.appendChild(col);
+        });
+
+        const cards = document.querySelectorAll('.collection-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseover', () => {
+                card.classList.add('shadow-lg');
+            });
+            card.addEventListener('mouseout', () => {
+                card.classList.remove('shadow-lg');
+            });
         });
     }
 
