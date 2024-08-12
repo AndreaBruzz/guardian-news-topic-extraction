@@ -16,7 +16,7 @@ services:
       retries: 5
       start_period: 40s
 
-  frontend-service:
+  frontend:
     build:
       context: ./frontend-service
       dockerfile: Dockerfile
@@ -32,8 +32,8 @@ services:
       - discovery.type=single-node
     ports:
       - "9200:9200"
-  # TODO change name
-  spring:
+
+  backend:
     build:
       context: ./monitor-service
       dockerfile: Dockerfile
@@ -45,7 +45,7 @@ services:
     environment:
       - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/articles
 
-  mallet-service:
+  mallet:
     build: ./mallet-service
     ports:
       - "8081:8080"
