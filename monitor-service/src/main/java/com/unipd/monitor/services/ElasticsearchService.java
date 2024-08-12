@@ -66,8 +66,8 @@ public class ElasticsearchService implements AutoCloseable{
         }
     }
 
-    public ArrayList<String> searchArticles(String index, String query) {
-        ArrayList<String> articles = new ArrayList<>();
+    public List<String> searchArticles(String index, String query) {
+        List<String> articles = new ArrayList<>();
 
         try {
             List<Hit<Article>> hits = searchByQuery(index, query);
