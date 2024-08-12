@@ -29,6 +29,8 @@ public class MalletService {
     public List<Topic> extractTopics(List<String> articles, int numTopics, int numWords) throws Exception {
         // Creazione della lista di pipe per il preprocessing dei documenti
         ArrayList<Pipe> pipeList = new ArrayList<>();
+        int numThreads = Math.min(Runtime.getRuntime().availableProcessors(), 8);
+        int numIterations = 1100;
 
         pipeList.add(new CharSequence2TokenSequence());
         pipeList.add(new TokenSequenceLowercase());
@@ -42,20 +44,15 @@ public class MalletService {
         ParallelTopicModel model = new ParallelTopicModel(numTopics);
         model.addInstances(instances);
 
-        model.setNumThreads(8);
-        model.setNumIterations(1000);
+        model.setNumThreads(numThreads);
+        model.setNumIterations(numIterations);
 
-        System.out.println("Running the model");
-
-        // Run the model
         try {
             model.estimate();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-
-        System.out.println("Execution finished");
 
         Alphabet dataAlphabet = instances.getDataAlphabet();
         ArrayList<TreeSet<IDSorter>> topicSortedWords = model.getSortedWords();
