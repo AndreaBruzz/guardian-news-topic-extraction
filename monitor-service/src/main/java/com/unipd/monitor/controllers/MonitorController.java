@@ -34,10 +34,10 @@ public class MonitorController {
     @PostMapping("/collect")
     public ResponseEntity<Map<String, String>> collect(@RequestBody MonitorRequestDTO monitorRequest) {
         try {
-            String url = buildApiUrl(monitorRequest.getIssueQuery(), monitorRequest.getStartDate(), monitorRequest.getEndDate());
-            int pages = monitorService.getPagesNumber(url);
+            String apiUrl = buildApiUrl(monitorRequest.getIssueQuery(), monitorRequest.getStartDate(), monitorRequest.getEndDate());
+            int pages = monitorService.getPagesNumber(apiUrl);
             for (int i = 1; i <= pages; i++) {
-                url += "&page=" + i;
+                String url = apiUrl + "&page=" + i;
                 System.out.println("page: " + i);
                 monitorService.collectArticles(url, monitorRequest.getTag());
             }
@@ -58,9 +58,9 @@ public class MonitorController {
     }
 
     private String buildApiUrl(String issueQuery, String startDate, String endDate) {
-        String url = baseUrl + "?show-fields=body" + "&q=" + issueQuery + "&from-date=" + startDate + "&to-date=" + endDate + "&page-size=200" + "&type=article" + "&api-key=" + apiKey;
-        System.out.println("Generated URL: " + url);
-        return url;
+        String apiUrl = baseUrl + "?show-fields=body" + "&q=" + issueQuery + "&from-date=" + startDate + "&to-date=" + endDate + "&page-size=200" + "&type=article" + "&api-key=" + apiKey;
+        System.out.println("Generated URL: " + apiUrl);
+        return apiUrl;
     }
 }
 
