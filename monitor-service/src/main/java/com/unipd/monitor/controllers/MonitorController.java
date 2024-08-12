@@ -32,19 +32,14 @@ public class MonitorController {
     private MonitorService monitorService;
 
     @PostMapping("/collect")
-    public ResponseEntity<Map<String, String>> collect(@RequestBody Map<String, String> request) {
+    public ResponseEntity<Map<String, String>> collect(@RequestBody MonitorRequestDTO monitorRequest) {
         try {
-            String issueQuery = request.get("issueQuery");
-            String tag = request.get("tag").toLowerCase();
-            String startDate = request.get("startDate");
-            String endDate = request.get("endDate");
-
-            String url = buildApiUrl(issueQuery, startDate, endDate);
+            String url = buildApiUrl(monitorRequest.getIssueQuery(), monitorRequest.getStartDate(), monitorRequest.getEndDate());
             int pages = monitorService.getPagesNumber(url);
             for (int i = 1; i <= pages; i++) {
                 url += "&page=" + i;
                 System.out.println("page: " + i);
-                monitorService.collectArticles(url, tag);
+                monitorService.collectArticles(url, monitorRequest.getTag());
             }
             return ResponseEntity.ok(Map.of("status", "monitoring"));
         } catch (Exception e) {
