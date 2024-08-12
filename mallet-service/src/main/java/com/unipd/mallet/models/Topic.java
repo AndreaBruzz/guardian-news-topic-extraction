@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Topic {
-    @JsonProperty("topic")
-    private ArrayList<String> topic;
+    @JsonProperty("words")
+    private ArrayList<String> words;
 
-    public Topic(ArrayList<String> topic) {
-        this.topic = topic;
+    public Topic(ArrayList<String> words) {
+        this.words = words;
     }
 
-    public ArrayList<String> getTopic() {
-        return topic;
+    public ArrayList<String> getWords() {
+        return words;
     }
 
-    public void setTopics(ArrayList<String> topic) {
-        this.topic = topic;
+    public void setWords(ArrayList<String> words) {
+        this.words = words;
     }
 }
