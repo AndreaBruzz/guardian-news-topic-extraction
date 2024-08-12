@@ -58,7 +58,7 @@ public class MonitorController {
     }
 
     private String buildApiUrl(String issueQuery, String startDate, String endDate) {
-        String url = baseUrl + "?show-fields=body" + "&q=" + issueQuery + "&from-date=" + startDate + "&to-date=" + endDate + "&page-size=200" + "&api-key=" + apiKey;
+        String url = baseUrl + "?show-fields=body" + "&q=" + issueQuery + "&from-date=" + startDate + "&to-date=" + endDate + "&page-size=200" + "&type=article" + "&api-key=" + apiKey;
         System.out.println("Generated URL: " + url);
         return url;
     }
