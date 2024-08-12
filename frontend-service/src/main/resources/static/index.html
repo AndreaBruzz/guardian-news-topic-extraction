@@ -1,13 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>SoftPlat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles Monitor</title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 
-<body>
-    <h1>Hi!</h1>
-    <p>That's just a work in progress landing page...</p>
+<body class="bg-dark text-light">
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <div class="container text-center d-flex flex-column justify-content-center align-items-center vh-100">
+        <div class="content">
+            <h1 class="mb-4">Welcome to Articles Monitor</h1>
+            <p class="lead">
+                Articles Monitor is a project developed by Andrea Bruttomesso and Davide Seghetto, Computer Engineering
+                students at the University of Padova. This application, created as a final project for the Software
+                Platforms course, showcases a microservices architecture orchestrated by Docker. It leverages
+                technologies such as Java Spring, Elasticsearch, and Mallet to deliver powerful article monitoring and
+                topic extraction capabilities.
+            </p>
+            <a href="/monitor" class="btn btn-primary btn-lg mt-4">Try it now!</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="script/loadComponents.js"></script>
 </body>
 
 </html>
