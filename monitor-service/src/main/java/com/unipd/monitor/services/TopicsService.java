@@ -20,12 +20,12 @@ public class TopicsService {
     @Value("${mallet.base.url}")
     private String baseUrl;
 
-    private final ElasticsearchService elasticsearchService;
+    private final SearchService searchService;
     private final RestTemplate restTemplate;
 
     @Autowired
-    public TopicsService(ElasticsearchService elasticsearchService, RestTemplate restTemplate) {
-        this.elasticsearchService = elasticsearchService;
+    public TopicsService(SearchService searchService, RestTemplate restTemplate) {
+        this.searchService = searchService;
         this.restTemplate = restTemplate;
     }
 
@@ -35,7 +35,7 @@ public class TopicsService {
         int numTopics = topicsRequest.getNumOfTopics();
         int numWords = topicsRequest.getNumOfTopWords();
 
-        List<String> articles = elasticsearchService.searchArticles(collectionId, query);
+        List<String> articles = searchService.searchArticles(collectionId, query);
 
         String malletServiceUrl = String.format("%s?numTopics=%d&numWords=%d", baseUrl, numTopics, numWords);
 
