@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
 
         submitButton.disabled = true;
-        submitButton.textContent = 'Searching...\nThis may take a while.';
+        submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Collecting...';
         responseMessage.textContent = '';
 
         const query = document.getElementById('query').value;
@@ -53,47 +53,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Creazione del contenitore per i topics
                 const topicsContainer = document.createElement('div');
-                topicsContainer.classList.add('topics-container', 'mt-4');
+                topicsContainer.classList.add('topics-container', 'mt-4', 'row');
 
                 // Ciclo attraverso i topics ricevuti e li visualizzo
                 if (result.topics && result.topics.length > 0) {
                     result.topics.forEach(topic => {
-                        const topicCard = document.createElement('div');
-                        topicCard.classList.add('card', 'mb-3');
+                        const col = document.createElement('div');
+                        col.classList.add('col-md-4', 'mb-4');
 
-                        const topicCardBody = document.createElement('div');
-                        topicCardBody.classList.add('card-body');
+                        const card = document.createElement('div');
+                        card.classList.add('card', 'h-100', 'bg-secondary', 'text-light', 'collection-card', 'shadow-sm');
+
+                        const cardBody = document.createElement('div');
+                        cardBody.classList.add('card-body', 'd-flex', 'flex-column', 'align-items-center', 'justify-content-center');
 
                         const topicTitle = document.createElement('h5');
-                        topicTitle.classList.add('card-title');
+                        topicTitle.classList.add('card-title', 'text-center');
                         topicTitle.textContent = `Topic ${topic.id}`;
 
                         const topicWords = document.createElement('p');
-                        topicWords.classList.add('card-text');
+                        topicWords.classList.add('card-text', 'text-center');
                         topicWords.textContent = topic.topWords.join(', ');
 
-                        topicCardBody.appendChild(topicTitle);
-                        topicCardBody.appendChild(topicWords);
-                        topicCard.appendChild(topicCardBody);
-                        topicsContainer.appendChild(topicCard);
+                        cardBody.appendChild(topicTitle);
+                        cardBody.appendChild(topicWords);
+                        card.appendChild(cardBody);
+                        col.appendChild(card);
+                        topicsContainer.appendChild(col);
                     });
 
                     // Aggiungo i topics alla pagina
                     document.body.appendChild(topicsContainer);
                 } else {
                     responseMessage.textContent = 'No topics found for the given query.';
-                    responseMessage.style.color = 'red';
+                    responseMessage.className = 'text-danger';
                 }
             } else {
                 const result = await response.json();
                 console.info('Error response:', result);
                 responseMessage.textContent = `Status: ${result.status}, Message: ${result.message}`;
-                responseMessage.style.color = 'red';
+                responseMessage.className = 'text-danger';
             }
         } catch (error) {
             console.error('Error:', error);
             responseMessage.textContent = 'An error occurred while submitting the data.';
-            responseMessage.style.color = 'red';
+            responseMessage.className = 'text-danger';
         } finally {
             submitButton.disabled = false;
             submitButton.textContent = 'Search Topics';

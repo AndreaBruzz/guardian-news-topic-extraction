@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Topics Modeling Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body class="bg-dark text-light">
-    <header class="text-center my-4">
-        <h1></h1>
-    </header>
+    <div id="header-placeholder"></div>
+
+    <h1 class="text-center mt-4"></h1>
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form id="topics-form" class="border p-4 bg-secondary text-light rounded">
+                <form id="topics-form" class="border p-4 bg-secondary text-light rounded shadow">
                     <div class="form-group">
                         <label for="query">Topics Query:</label>
                         <input type="text" class="form-control" id="query" name="query" required>
@@ -35,6 +36,10 @@
             </div>
         </div>
     </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="script/loadComponents.js"></script>
     <script src="script/topics.js"></script>
 </body>
 
