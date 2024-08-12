@@ -4,6 +4,7 @@ import com.unipd.monitor.dtos.TopicResponseDTO;
 import com.unipd.monitor.dtos.TopicsRequestDTO;
 import com.unipd.monitor.services.TopicsService;
 
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class TopicsController {
     }
 
     @PostMapping("/topics")
-    public ResponseEntity<TopicResponseDTO> getTopics(@RequestBody TopicsRequestDTO topicsRequest) {
+    public ResponseEntity<TopicResponseDTO> getTopics(@Valid @RequestBody TopicsRequestDTO topicsRequest) {
         TopicResponseDTO response = topicsService.getTopics(topicsRequest);
         return ResponseEntity.ok(response);
     }

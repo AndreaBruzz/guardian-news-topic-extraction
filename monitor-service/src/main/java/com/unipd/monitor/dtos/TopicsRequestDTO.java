@@ -1,9 +1,23 @@
 package com.unipd.monitor.dtos;
 
+import javax.annotation.Nonnegative;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class TopicsRequestDTO {
+    @NotBlank(message = "Query must be not blank")
     private String query;
+
+    @Nonnegative()
+    @NotNull(message = "Number of topics must be not null")
     private int numOfTopics;
+
+    @Nonnegative()
+    @NotNull(message = "Number of top words must be not null")
     private int numOfTopWords;
+
+    @NotBlank(message = "Collection ID must be not blank")
     private String collectionId;
 
     public TopicsRequestDTO() {}
