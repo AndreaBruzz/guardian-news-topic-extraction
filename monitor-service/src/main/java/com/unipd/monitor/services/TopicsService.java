@@ -49,7 +49,7 @@ public class TopicsService {
         List<TopicDTO> topics = new ArrayList<>();
         for (int i = 0; i < rawTopics.size(); i++) {
             Map<String, Object> rawTopic = rawTopics.get(i);
-            List<String> topWords = (List<String>) rawTopic.get("topic");
+            List<String> topWords = (List<String>) rawTopic.get("words");
             topics.add(new TopicDTO(i, topWords));
         }
 
