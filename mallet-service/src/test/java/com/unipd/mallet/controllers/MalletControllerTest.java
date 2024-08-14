@@ -35,7 +35,7 @@ public class MalletControllerTest {
         List<String> documents = Arrays.asList("Artificial Intelligence and Machine Learning", "Deep Learning in Neural Networks");
         String jsonDocuments = objectMapper.writeValueAsString(documents);
         
-        mockMvc.perform(MockMvcRequestBuilders.post("/mallet/topics")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/mallet/topics")
                 .content(jsonDocuments)
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("numTopics", "2")

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @RestController
-@RequestMapping("/mallet")
+@RequestMapping("api/mallet")
 public class MalletController {
 
     private final MalletService malletService;
