@@ -86,14 +86,24 @@ document.addEventListener('DOMContentLoaded', () => {
             col.classList.add('col-md-4', 'mb-4');
             const card = document.createElement('div');
             card.classList.add('card', 'h-100', 'bg-secondary', 'text-light', 'collection-card', 'shadow-sm');
-            card.innerHTML = `<div class="card-body d-flex flex-column align-items-center justify-content-center">
-                                <h4 class="card-title text-center">${(collection.collection).toUpperCase()}</h4>
-                              </div>`;
+            card.innerHTML = `
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                    <h4 class="card-title text-center">${(collection.collection).toUpperCase()}</h4>
+                    <button class="btn btn-danger mt-3 delete-collection-btn">Delete</button>
+                </div>`;
             card.addEventListener('click', () => {
                 window.location.href = `/topics?collectionId=${collection.collection}`;
             });
             col.appendChild(card);
             collectionsContainer.appendChild(col);
+
+            const deleteButton = card.querySelector('.delete-collection-btn');
+            deleteButton.addEventListener('click', async () => {
+                event.stopPropagation();
+                if (confirm(`Are you sure you want to delete the collection "${collection.collection}"?`)) {
+                    await deleteCollection(collection.collection);
+                }
+            });
         });
 
         const cards = document.querySelectorAll('.collection-card');
@@ -105,6 +115,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.classList.remove('shadow-lg');
             });
         });
+    }
+
+    async function deleteCollection(collectionId) {
+        try {
+            const response = await fetch(`http://localhost:8080/api/collections/${collectionId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                alert(`Collection "${collectionId}" has been successfully deleted.`);
+                fetchCollections();
+            } else {
+                alert(`Failed to delete collection "${collectionId}".`);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while trying to delete the collection.');
+        }
     }
 
     // Fetch and display collections on page load
