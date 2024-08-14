@@ -62,7 +62,7 @@ public class SearchService implements AutoCloseable{
             );
 
             double maxScore = initialSearchResponse.hits().maxScore();
-            double minScore = maxScore * 0.7;
+            double minScore = maxScore * 0.5;
 
             SearchResponse<Article> finalSearchResponse = esClient.search(s -> s
                     .index(index)

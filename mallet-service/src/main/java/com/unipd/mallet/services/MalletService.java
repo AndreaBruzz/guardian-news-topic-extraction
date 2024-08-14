@@ -30,7 +30,7 @@ public class MalletService {
         // Creazione della lista di pipe per il preprocessing dei documenti
         ArrayList<Pipe> pipeList = new ArrayList<>();
         int numThreads = Math.min(Runtime.getRuntime().availableProcessors(), 8);
-        int numIterations = 1100;
+        int numIterations = 800;
 
         pipeList.add(new CharSequence2TokenSequence());
         pipeList.add(new TokenSequenceLowercase());
