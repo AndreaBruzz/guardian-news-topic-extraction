@@ -20,7 +20,7 @@ body {
 
 /* Header Styles */
 .header {
-    background-color: #343a40; /* Dark background for the header */
+    background-color: #5e89b4;
     color: #f8f9fa; /* Light text color for contrast */
     padding: 1.5rem 0;
     display: flex; /* Use flexbox for layout */
@@ -110,4 +110,8 @@ main p {
 .footer p {
     margin: 0;
     font-size: 0.875rem;
+}
+
+.card:hover {
+    cursor: pointer;
 }
