@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,6 +60,19 @@ public class MonitorController {
         Map<String, List<Map<String, String>>> response = Map.of("data", data);
         return ResponseEntity.ok().body(response);
     }
+
+    @DeleteMapping("/collections/{collectionId}")
+    public ResponseEntity<Void> deleteCollection(@PathVariable String collectionId) {
+        List<String> collectionNames = monitorService.getCollectionNames();
+        
+        if (!collectionNames.contains(collectionId)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        monitorService.deleteCollection(collectionId);
+        return ResponseEntity.noContent().build();
+    }
+
 
     private String buildApiUrl(String issueQuery, String startDate, String endDate) {
         String apiUrl = baseUrl + "?show-fields=body" + "&q=" + issueQuery + "&from-date=" + startDate + "&to-date=" + endDate + "&page-size=200" + "&type=article" + "&api-key=" + apiKey;

@@ -41,4 +41,13 @@ public class MonitorServiceTest {
 
         verify(mongoTemplate, times(1)).save(any(Article.class), eq(mockTag));
     }
+
+    @Test
+    public void testDeleteCollection() {
+        String collectionId = "testCollection";
+
+        monitorService.deleteCollection(collectionId);
+
+        verify(mongoTemplate, times(1)).dropCollection(collectionId);
+    }
 }

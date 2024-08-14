@@ -78,4 +78,8 @@ public class MonitorService {
     public List<String> getCollectionNames() {
         return new ArrayList<>(mongoTemplate.getCollectionNames());
     }
+
+    public void deleteCollection(String collectionId) {
+        mongoTemplate.dropCollection(collectionId);
+    }
 }

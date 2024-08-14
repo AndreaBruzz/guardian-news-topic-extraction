@@ -1,6 +1,5 @@
 package com.unipd.monitor.controllers;
 
-import com.unipd.monitor.models.Article;
 import com.unipd.monitor.services.MonitorService;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -8,25 +7,26 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class MonitorControllerTest {
 
     @Mock
     private MonitorService monitorService;
-
-    // @Mock
-    // private MongoTemplate mongoTemplate;
 
     @InjectMocks
     private MonitorController monitorController;
@@ -61,18 +61,33 @@ public class MonitorControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-    // TODO fix this test
-    // Sembra ci siano problemi nella connessione a mongo db in 
-    // fase di test
-    //
-    // @Test
-    // public void testCollectionRetrieval() throws Exception {
-    //     Article article = new Article();
-    //     mongoTemplate.save(article, "AI");
+      @Test
+    public void testGetCollections() throws Exception {
+        List<String> collections = Arrays.asList("collection1", "collection2");
+        when(monitorService.getCollectionNames()).thenReturn(collections);
 
-    //     mockMvc.perform(get("/api/collections")
-    //             .contentType(MediaType.APPLICATION_JSON))
-    //             .andExpect(status().isOk())
-    //             .andExpect(content().json("{\"data\":[{\"collection\":\"AI\"}]}"));
-    // }
+        mockMvc.perform(get("/api/collections"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data").isArray())
+                .andExpect(jsonPath("$.data[0].collection").value("collection1"))
+                .andExpect(jsonPath("$.data[1].collection").value("collection2"));
+    }
+
+    @Test
+    public void testDeleteCollection() throws Exception {
+        String collectionId = "testCollection";
+        when(monitorService.getCollectionNames()).thenReturn(Arrays.asList("testCollection"));
+
+        mockMvc.perform(delete("/api/collections/{collectionId}", collectionId))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    public void testDeleteInexistingCollection() throws Exception {
+        String collectionId = "nonExistentCollection";
+        when(monitorService.getCollectionNames()).thenReturn(Arrays.asList("testCollection"));
+
+        mockMvc.perform(delete("/api/collections/{collectionId}", collectionId))
+                .andExpect(status().isNotFound());
+    }
 }
