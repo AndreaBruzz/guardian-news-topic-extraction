@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        // Disabilita il pulsante di invio e mostra il messaggio di caricamento
         submitButton.disabled = true;
         submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Collecting...';
         responseMessage.textContent = '';
@@ -45,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error:', error);
             showResponseMessage('❌ An error occurred while submitting the data.', 'error');
         } finally {
-            // Riabilita il pulsante di invio e ripristina il testo originale
             await delay(3000);
             location.reload();
         }
@@ -80,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Collections container not found');
             return;
         }
-        collectionsContainer.innerHTML = ''; // Clear previous content
+        collectionsContainer.innerHTML = '';
         collections.forEach(collection => {
             const col = document.createElement('div');
             col.classList.add('col-md-4', 'mb-4');
@@ -135,6 +133,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Fetch and display collections on page load
     fetchCollections();
 });

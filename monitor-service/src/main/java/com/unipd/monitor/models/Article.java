@@ -11,17 +11,14 @@ public class Article {
     private String webTitle;
     private String body;
 
-    // Default constructor
     public Article() {}
 
-    // Overloaded constructor
     public Article(String id, String webTitle, String body) {
         this.id = id;
         this.webTitle = webTitle;
         this.body = body;
     }
 
-    // Getters and Setters
     public String getId() {
         return id;
     }

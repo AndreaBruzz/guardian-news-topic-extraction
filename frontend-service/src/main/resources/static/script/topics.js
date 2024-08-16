@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     var urlParams = new URLSearchParams(window.location.search);
     var collectionId = urlParams.get('collectionId');
 
-    // Evito che l'utente arrivi alla pagina del topic senza avere la collectionId
     if (collectionId === null) { 
         window.location.replace('/monitor');
     }
@@ -45,17 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
                 console.info('Response received:', result);
 
-                // Rimuovo eventuale contenitore esistente
                 const existingContainer = document.querySelector('.topics-container');
                 if (existingContainer) {
                     existingContainer.remove();
                 }
 
-                // Creazione del contenitore per i topics
                 const topicsContainer = document.createElement('div');
                 topicsContainer.classList.add('topics-container', 'mt-4', 'row');
 
-                // Ciclo attraverso i topics ricevuti e li visualizzo
                 if (result.topics && result.topics.length > 0) {
                     result.topics.forEach(topic => {
                         const col = document.createElement('div');
@@ -82,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         topicsContainer.appendChild(col);
                     });
 
-                    // Aggiungo i topics alla pagina
                     document.body.appendChild(topicsContainer);
                 } else {
                     responseMessage.textContent = 'No topics found for the given query.';

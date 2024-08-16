@@ -27,7 +27,8 @@ import java.util.TreeSet;
 public class MalletService {
 
     public List<Topic> extractTopics(List<String> articles, int numTopics, int numWords) throws Exception {
-        // Creazione della lista di pipe per il preprocessing dei documenti
+        // Change numIterations to fix the trade off between
+        // performances and precision
         ArrayList<Pipe> pipeList = new ArrayList<>();
         int numThreads = Math.min(Runtime.getRuntime().availableProcessors(), 8);
         int numIterations = 800;

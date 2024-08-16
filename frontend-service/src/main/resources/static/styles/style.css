@@ -1,8 +1,6 @@
-/* Global Styles */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #343a40; /* Dark background for the entire page */
-    color: #f8f9fa; /* Light text color for contrast */
+    background-color: #343a40;
     margin: 0;
     padding: 0;
     display: flex;
@@ -10,7 +8,6 @@ body {
     min-height: 100vh;
 }
 
-/* Container Styles */
 .container {
     max-width: 960px;
     margin: 0 auto;
@@ -18,35 +15,34 @@ body {
     flex: 1;
 }
 
-/* Header Styles */
 .header {
     background-color: #5e89b4;
-    color: #f8f9fa; /* Light text color for contrast */
+    color: #f8f9fa;
     padding: 1.5rem 0;
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Center items vertically */
+    display: flex;
+    align-items: center;
 }
 
 .header .container {
     display: flex;
-    align-items: center; /* Align items vertically */
-    justify-content: space-between; /* Space items horizontally with space between them */
-    width: 100%; /* Full width to use space */
-    max-width: 960px; /* Limit the width of the container */
-    margin: 0 auto; /* Center the container horizontally */
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
 }
 
 .header .container2 {
     display: flex;
-    flex-direction: column; /* Arrange text content in a column */
-    align-items: center; /* Center text content horizontally */
-    text-align: center; /* Center text within this container */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .header-image {
-    width: 110px; /* Increase the width of the images */
-    height: auto; /* Maintain aspect ratio */
-    margin: 0 5px; /* Reduce the margin between images */
+    width: 110px;
+    height: auto;
+    margin: 0 5px;
 }
 
 .header h1 {
@@ -61,7 +57,6 @@ body {
 }
 
 
-/* Main Content Styles */
 main {
     background-color: #343a40;
     color: #f8f9fa;
@@ -79,7 +74,6 @@ main p {
     margin-bottom: 1.5rem;
 }
 
-/* Button Styles */
 .btn-primary {
     display: inline-block;
     padding: 0.75rem 1.5rem;
@@ -95,7 +89,6 @@ main p {
     background-color: #0056b3;
 }
 
-/* Footer Styles */
 .footer {
     background-color: #343a40;
     color: #f8f9fa;

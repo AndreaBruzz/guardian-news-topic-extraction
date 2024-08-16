@@ -20,7 +20,6 @@ public class MalletServiceTest {
 
     @Test
     public void testExtractTopics() throws Exception {
-        // Articoli di esempio
         List<String> articles = Arrays.asList(
             "This is a test article about machine learning.",
             "This is another article about deep learning and AI.",
