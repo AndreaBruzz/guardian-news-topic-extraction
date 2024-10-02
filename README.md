@@ -1,1 +1,9 @@
-# software-platforms
+# Online News Monitoring and Analysis Platform
+
+This project was developed by two students enrolled in the Computer Engineering Master’s program, specifically within the Software Platforms course at the University of Padova. In today’s world, characterized by an ever-growing influx of online content, the need for advanced tools to monitor and analyze public discussions on relevant topics has become increasingly important. This project aims to develop an innovative platform for monitoring and analyzing articles from online newspapers, utilizing a microservices architecture.
+
+The platform is tailored to meet the needs of expert users, such as journalists and sociologists, who wish to explore and understand the themes discussed in the media regarding specific topics of interest. The project is divided into two main phases. The first phase involves monitoring and collecting articles related to a particular topic of interest, such as **Artificial Intelligence**, through a targeted search query. These articles are subsequently stored in a database.
+
+The second phase focuses on analyzing the themes discussed within a subset of the collected articles. In this phase, users can specify an additional query, such as **ChatGPT**, to extract and analyze the primary themes covered in articles that match this query within the initial corpus. The platform then provides representations of these emerging themes, helping users to understand prevailing trends and discussions in the media.
+
+Specifically, newspaper articles are retrieved from **The Guardian API**, stored in **MongoDB**, made searchable via **Elasticsearch**, and analyzed using **Mallet** for topic modeling. To ensure scalability and modularity, the platform is structured into several services, each running within Docker containers. Users interact with the platform through HTTP requests facilitated by a user-friendly UI, making the system accessible and efficient.
